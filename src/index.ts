@@ -5,9 +5,18 @@ import mongoose from "mongoose";
 dotenv.config();
 
 const SERVER_PORT = process.env.SERVER_PORT
+const MONGO_URL = process.env.MONGO_URL as string
 
 const app = express();
 
 // json data parse in incoming requests
 app.use(express.json());
 
+
+mongoose.connect(MONGO_URL).then(() => {
+    console.log("Database connected..")
+})
+.catch((err) => {
+    console.error(`DB connection failed: ${err}`)
+    process.exit(1)
+})
