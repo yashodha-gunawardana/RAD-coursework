@@ -20,3 +20,7 @@ mongoose.connect(MONGO_URL).then(() => {
     console.error(`DB connection failed: ${err}`)
     process.exit(1)
 })
+
+app.listen(SERVER_PORT, () => {
+    console.log(`Server is running on ${SERVER_PORT}`)
+})
