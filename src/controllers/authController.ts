@@ -42,6 +42,20 @@ export const registerUser = async (req: Request, res: Response) => {
             approved: approvelStatus
         })
         await newUser.save();
+
+        res.status(201).json({
+            message: 
+                role == Role.VENDOR
+                    ? "Vendor registered successfully, Waiting for approval.."
+                    : "User registered successfully..",
+            data: {
+                id: newUser._id,
+                email: newUser.email,
+                roles: newUser.roles,
+                approved: newUser.approved
+            }        
+
+        })
     } catch (err) {
 
     }
