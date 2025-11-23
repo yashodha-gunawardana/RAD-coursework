@@ -14,4 +14,5 @@ export interface AuthRequest extends Request {
 export const authenticate = (
     req: AuthRequest,
     res: Response,
+    next: NextFunction
 )
