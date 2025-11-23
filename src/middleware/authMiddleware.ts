@@ -12,5 +12,5 @@ export interface AuthRequest extends Request {
 
 // midlleware function to authenticate requests
 export const authenticate = (
-
+    req: AuthRequest,
 )
