@@ -20,9 +20,12 @@ export const requiredRole = (roles: Role[]) => {
 
         if (!hashRole) {
             return res.status(403).json({
+                // user is logged in but does not have permission
                 message: `Require ${roles.join(", ")} role`
             })
         }
+
+        next() // if user is authenticated and has correct role allow req to continue
     }    
     
     
