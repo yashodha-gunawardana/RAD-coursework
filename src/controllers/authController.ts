@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { Role, User, Status } from "../model/userModel";
 import bcrypt from "bcryptjs";
 
-
+// register user function
 export const registerUser = async (req: Request, res: Response) => {
     try {
         const { fullname, email, password, address, phone, role} = req.body;
@@ -55,10 +55,11 @@ export const registerUser = async (req: Request, res: Response) => {
                 approved: newUser.approved
             }        
         })
-        
+
     } catch (err: any) {
         res.status(500).json({
             message: err?.message
         })
     }
 }
+
