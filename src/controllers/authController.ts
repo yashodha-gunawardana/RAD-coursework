@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Role, User, Status } from "../model/userModel";
 import bcrypt from "bcryptjs";
+import { signAccessToken } from "../utils/tokens";
 
 // register user function
 export const registerUser = async (req: Request, res: Response) => {
@@ -64,5 +65,6 @@ export const registerUser = async (req: Request, res: Response) => {
 }
 
 
+// login user function
 
 
