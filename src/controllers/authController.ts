@@ -99,8 +99,11 @@ export const loginUser = async (req: Request, res: Response) => {
                 accessToken
             }
         })
-    } catch (err) {
 
+    } catch (err: any) {
+        res.status(500).json({
+            message: err?.message
+        })
     }
 }
 
