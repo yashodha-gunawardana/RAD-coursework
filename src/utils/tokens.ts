@@ -6,3 +6,11 @@ import dotenv from "dotenv";
 dotenv.config()
 
 const JWT_SECRET = process.env.JWT_SECRET as string
+
+// generate a JSON web token for a given user
+export const signAccessToken = (user: IUser): string => {
+    return jwt.sign(
+        
+    )
+
+}
