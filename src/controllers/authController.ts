@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Role, User } from "../model/userModel";
+import bcrypt from "bcryptjs";
 
 
 export const registerUser = async (req: Request, res: Response) => {
@@ -25,6 +26,8 @@ export const registerUser = async (req: Request, res: Response) => {
                 message: "Email already exists.."
             })
         }
+
+      
     } catch (err) {
 
     }
