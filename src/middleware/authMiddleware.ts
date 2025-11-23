@@ -15,4 +15,6 @@ export const authenticate = (
     req: AuthRequest,
     res: Response,
     next: NextFunction
-)
+) => {
+    const authHeader = req.headers.authorization
+}
