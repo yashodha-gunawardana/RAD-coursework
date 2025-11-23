@@ -16,5 +16,12 @@ export const authenticate = (
     res: Response,
     next: NextFunction
 ) => {
+    // reads the authorization header from the incoming http request.
+    // excepted format("Bearer <JWT token>")
     const authHeader = req.headers.authorization
+    if (!authHeader) {
+        return res.status(401).json({
+            message: "No token provided.."
+        })
+    }
 }
