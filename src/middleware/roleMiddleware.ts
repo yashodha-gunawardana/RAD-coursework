@@ -28,5 +28,4 @@ export const requiredRole = (roles: Role[]) => {
         next() // if user is authenticated and has correct role allow req to continue
     }    
     
-    
 }
