@@ -54,9 +54,11 @@ export const registerUser = async (req: Request, res: Response) => {
                 roles: newUser.roles,
                 approved: newUser.approved
             }        
-
         })
-    } catch (err) {
-
+        
+    } catch (err: any) {
+        res.status(500).json({
+            message: err?.message
+        })
     }
 }
