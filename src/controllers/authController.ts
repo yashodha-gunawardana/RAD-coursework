@@ -12,11 +12,14 @@ export const registerUser = async (req: Request, res: Response) => {
             })
         }
 
+        // only user and vendor roles allowed at registration
         if (role !== Role.USER && role !== Role.VENDOR) {
             return res.status(400).json({
                 message: "Invalid role.."
             })
         }
+
+        const existingUser = await User.findOne({ email });
     } catch (err) {
 
     }
