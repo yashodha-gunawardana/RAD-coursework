@@ -41,6 +41,7 @@ export const registerUser = async (req: Request, res: Response) => {
             roles: [role],
             approved: approvelStatus
         })
+        await newUser.save();
     } catch (err) {
 
     }
