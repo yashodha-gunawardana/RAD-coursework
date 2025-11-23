@@ -90,6 +90,15 @@ export const loginUser = async (req: Request, res: Response) => {
 
         // generate JWT access token for the authenticated user
         const accessToken = signAccessToken(existingUser)
+
+        res.status(200).json({
+            message: "Login successfully..",
+            data: {
+                email: existingUser.email,
+                roles: existingUser.roles,
+                accessToken
+            }
+        })
     } catch (err) {
 
     }
