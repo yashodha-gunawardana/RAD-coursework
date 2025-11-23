@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
-import { Role, User } from "../model/userModel";
+import { Role, User, Status } from "../model/userModel";
 import bcrypt from "bcryptjs";
 
 
 export const registerUser = async (req: Request, res: Response) => {
     try {
-        const { fullname, email, password, address, phone, role } = req.body;
+        const { fullname, email, password, address, phone, role} = req.body;
 
-        if (!fullname || !email || !password || !address || !phone || role) {
+        if (!fullname || !email || !password || !address || !phone) {
             return res.status(400).json({
                 message: "All fields are required.."
             })
@@ -27,7 +27,9 @@ export const registerUser = async (req: Request, res: Response) => {
             })
         }
 
-        const hashedPassowrd = await bcrypt.hash(password, 10)
+        const hashedPassowrd = await bcrypt.hash(password, 10);
+
+        const approvelStatus = role == Role.VENDOR ? Status.PENDING : Status.APPROVED
     } catch (err) {
 
     }
