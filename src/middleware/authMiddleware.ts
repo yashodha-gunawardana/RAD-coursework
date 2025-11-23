@@ -24,4 +24,6 @@ export const authenticate = (
             message: "No token provided.."
         })
     }
+
+    const token = authHeader.split(" ")[1] 
 }
