@@ -6,3 +6,8 @@ import { Role } from "../model/userModel";
 
 // create a new Express Router object
 const router = Router();
+
+// register a normal user
+router.post("/register", register)
+
+export default router
