@@ -70,8 +70,14 @@ export const loginUser = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body
 
+        // find the user in the database using the provided email
         const existingUser = await User.findOne({ email })
 
+        if (!existingUser) {
+            return res.status(401).json({
+                message: "Invalid credentials.."
+            })
+        }
     } catch (err) {
 
     }
