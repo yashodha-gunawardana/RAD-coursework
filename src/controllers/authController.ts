@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { Role, User, Status } from "../model/userModel";
 import bcrypt from "bcryptjs";
 import { signAccessToken } from "../utils/tokens";
+import { AuthRequest } from "../middleware/authMiddleware";
 
 // register user function
 export const registerUser = async (req: Request, res: Response) => {
@@ -109,8 +110,12 @@ export const loginUser = async (req: Request, res: Response) => {
 
 
 // get own details function
-export const getMyDetails = async (req: Request, res: Response) => {
-    
+export const getMyDetails = async (req: AuthRequest, res: Response) => {
+    if (!req.user) {
+        return res.status(401).json({
+            message: "Unauthorized.."
+        })
+    }
 }
 
 
