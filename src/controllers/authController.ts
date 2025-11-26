@@ -146,8 +146,13 @@ export const handleRefreshToken = async (req: Request, res: Response) => {
         // get the refresh token sent by the client
         const { token } = req.body
 
-    } catch (err);
-    ) {
+        if (!token) {
+            return res.status(400).json({
+                message: "Token required.."
+            })
+        }
+
+    } catch (err) {
 
     }
 }
