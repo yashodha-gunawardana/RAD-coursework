@@ -34,7 +34,10 @@ export const createEvent = async (req: Request, res: Response) => {
 // get all events function
 export const getEvents = async (req: Request, res: Response) => {
     try {
+        // fetch all event records from db
         const events = await Event.find()
+        res.status(200).json(events)
+        
     } catch (err) {
 
     }
