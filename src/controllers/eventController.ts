@@ -89,5 +89,10 @@ export const updateEvent = async (req: Request, res: Response) => {
 
 // delete event function
 export const deleteEvent = async (req: Request, res: Response) => {
-    
+    try {
+        const deletedEvent = await Event.findByIdAndDelete(req.params.id)
+
+    } catch (err) {
+
+    }
 }
