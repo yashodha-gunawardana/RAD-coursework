@@ -163,6 +163,12 @@ export const handleRefreshToken = async (req: Request, res: Response) => {
          // Find user in database by ID from token payload
         const user = await User.findById(payload.sub)
 
+        if (!user) {
+            return res.status(400).json({
+                message: "Invalid refresh token.."
+            })
+        }
+
     } catch (err) {
 
     }
