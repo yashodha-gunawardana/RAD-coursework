@@ -30,5 +30,8 @@ export interface IEvent extends Document {
 }
 
 const eventSchema = new Schema<IEvent> (
-    
+    {
+        userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    }
+
 )
