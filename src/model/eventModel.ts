@@ -16,6 +16,7 @@ export enum Status {
     CANCELLED = "CANCELLED"
 }
 
+// TypeScript structure
 export interface IEvent extends Document {
     userId: mongoose.Types.ObjectId
     title: string
@@ -29,6 +30,7 @@ export interface IEvent extends Document {
     createdAt: Date
 }
 
+// database structure for event
 const eventSchema = new Schema<IEvent> (
     {
         userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
@@ -44,3 +46,5 @@ const eventSchema = new Schema<IEvent> (
     { timestamps: true }
 
 )
+
+export default mongoose.model<IEvent>('Event', eventSchema)
