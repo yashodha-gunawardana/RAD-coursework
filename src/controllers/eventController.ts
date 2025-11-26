@@ -69,5 +69,10 @@ export const getEventById = async (req: Request, res: Response) => {
 
 // update event function
 export const updateEvent = async (req: Request, res: Response) => {
-    
+    try {
+        const updateEvent = await Event.findByIdAndUpdate(req.params.id, req.body, { new: true })
+
+    } catch (err) {
+
+    }
 }
