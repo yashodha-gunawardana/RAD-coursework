@@ -140,3 +140,8 @@ export const getMyDetails = async (req: AuthRequest, res: Response) => {
 }
 
 
+// refresh token & generate a new access token function
+export const handleRefreshToken = async (req: Request, res: Response) => {
+    
+}
+
