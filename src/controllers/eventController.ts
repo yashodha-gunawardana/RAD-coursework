@@ -79,7 +79,10 @@ export const updateEvent = async (req: Request, res: Response) => {
         }
         res.status(200).json(updateEvent)
 
-    } catch (err) {
+    } catch (err: any) {
+        res.status(500).json({
+            message: err?.message
+        })
 
     }
 }
