@@ -14,6 +14,9 @@ const app = express();
 // json data parse in incoming requests
 app.use(express.json());
 
+app.use(cors({
+    origin: ["http://localhost:5173"],
+}))
 // mount routes
 app.use("/api/v1/auth", AuthRoutes)
 
