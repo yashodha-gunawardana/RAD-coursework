@@ -37,8 +37,11 @@ export const getEvents = async (req: Request, res: Response) => {
         // fetch all event records from db
         const events = await Event.find()
         res.status(200).json(events)
-        
-    } catch (err) {
+
+    } catch (err: any) {
+        res.status(500).json({
+            message: err?.message
+        })
 
     }
 }
