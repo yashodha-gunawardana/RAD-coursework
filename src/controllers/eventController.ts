@@ -49,7 +49,7 @@ export const getEvents = async (req: AuthRequest, res: Response) => {
     }
 }
 
-// get event by id function
+// get event by id function (user, or admin)
 export const getEventById = async (req: AuthRequest, res: Response) => {
     try {
         // retrieve event using id from url paramaeter
@@ -62,6 +62,8 @@ export const getEventById = async (req: AuthRequest, res: Response) => {
         }
 
         const isOwner = event.userId.toString() === req.user._id.toString()
+
+        const isAdmin = req.user.roles?.includes("admin")
         res.status(200).json(event)
 
     } catch (err: any) {
