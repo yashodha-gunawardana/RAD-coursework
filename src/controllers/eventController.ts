@@ -90,6 +90,9 @@ export const updateEvent = async (req: AuthRequest, res: Response) => {
                 message: "Event not found.."
             })
         }
+
+        const isOwner = event.userId.toString() === req.user._id.toString()
+        const isAdmin = req.user.roles?.includes("admin")
         const updatedEvent = await Event.findByIdAndUpdate(req.params.id, req.body, { new: true })
 
         if (!updatedEvent) {
