@@ -50,7 +50,7 @@ export const getEvents = async (req: AuthRequest, res: Response) => {
 }
 
 // get event by id function
-export const getEventById = async (req: Request, res: Response) => {
+export const getEventById = async (req: AuthRequest, res: Response) => {
     try {
         // retrieve event using id from url paramaeter
         const event = await Event.findById(req.params.id)
@@ -60,6 +60,8 @@ export const getEventById = async (req: Request, res: Response) => {
                 message: "Event not found.."
             })
         }
+
+        const isOwner = event.userId.toString() === req.user._id.toString()
         res.status(200).json(event)
 
     } catch (err: any) {
