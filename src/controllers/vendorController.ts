@@ -77,6 +77,11 @@ export const updateVendor = async (req: AuthRequest, res: Response) => {
             })
         }
 
+        return res.status(201).json({
+            message: "Vendor updated successfully..",
+            data: vendor
+        })
+
     } catch (err) {
 
     }
