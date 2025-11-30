@@ -6,3 +6,6 @@ import { Role } from "../model/userModel";
 
 
 const router = Router();
+
+router.get("/", getAllVendors)
+
