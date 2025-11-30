@@ -22,3 +22,9 @@ export const getAllVendors = async (req: Request, res: Response) => {
         })
     }
 }
+
+
+// create a vendor function (only admin)
+export const createVendor = async (req: AuthRequest, res: Response) => {
+    
+}
