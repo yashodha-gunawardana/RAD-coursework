@@ -51,7 +51,9 @@ export const createVendor = async (req: AuthRequest, res: Response) => {
             data: newVendor
         })
 
-    } catch (err) {
-        
+    } catch (err: any) {
+        return res.status(500).json({
+            message: err?.message
+        })
     }
 }
