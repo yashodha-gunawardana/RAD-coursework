@@ -105,6 +105,8 @@ export const deleteVendor = async (req: AuthRequest, res: Response) => {
                 message: "Vendor not found.."
             })
         }
+        
+        await Vendor.deleteOne()
 
     } catch (err) {
 
