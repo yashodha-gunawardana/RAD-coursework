@@ -69,7 +69,7 @@ export const updateVendor = async (req: AuthRequest, res: Response) => {
             })
         }
 
-        const vendor = await Vendor.findByIdAndUpdate(req.params.id, req.body, )
+        const vendor = await Vendor.findByIdAndUpdate(req.params.id, req.body, { new: true })
 
     } catch (err) {
 
