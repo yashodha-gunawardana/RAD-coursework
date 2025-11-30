@@ -57,3 +57,9 @@ export const createVendor = async (req: AuthRequest, res: Response) => {
         })
     }
 }
+
+
+// update vendor function (only admin)'
+export const updateVendor = async (req: AuthRequest, res: Response) => {
+    
+}
