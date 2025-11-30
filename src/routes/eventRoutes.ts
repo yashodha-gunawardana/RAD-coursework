@@ -11,6 +11,10 @@ router
     .post(authenticate, createEvent)
     .get(authenticate, getMyEvents)
 
-
+router
+    .route("/:id")
+    .get(authenticate, getEventById)
+    .put(authenticate, updateEvent)
+    .delete(authenticate, deleteEvent)
 
 export default router
