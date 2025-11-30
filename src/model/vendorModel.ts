@@ -10,3 +10,14 @@ export enum VendorCategory {
     FLORIST = "FLORIST",
     OTHER = "OTHER"
 }
+
+export interface IVendor extends Document {
+    name: string
+    category: VendorCategory
+    contact: string
+    priceRange: string
+    description?: string
+    image?: string
+    isAvailable: boolean
+    
+}
