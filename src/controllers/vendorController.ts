@@ -46,9 +46,12 @@ export const createVendor = async (req: AuthRequest, res: Response) => {
         })
         await newVendor.save()
 
-        
+        return res.status(201).json({
+            message: "Vendor created successfully..",
+            data: newVendor
+        })
 
     } catch (err) {
-
+        
     }
 }
