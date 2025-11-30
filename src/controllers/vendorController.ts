@@ -62,12 +62,14 @@ export const createVendor = async (req: AuthRequest, res: Response) => {
 // update vendor function (only admin)'
 export const updateVendor = async (req: AuthRequest, res: Response) => {
     try {
-        
+
         if (!req.user?.roles?.includes("admin")) {
             return res.status(403).json({
                 message: "Only admin can update vendors.."
             })
         }
+
+        const vendor = await Vendor.findByIdAndUpdate(req.params.id, req.body, )
 
     } catch (err) {
 
