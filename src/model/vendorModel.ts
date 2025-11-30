@@ -21,3 +21,17 @@ export interface IVendor extends Document {
     isAvailable: boolean
     addedBy: mongoose.Types.ObjectId
 }
+
+const vendorSchema = new Schema<IVendor> (
+    {
+        name: { type: String, required: true, trim: true },
+        category: { type: String, enum: Object.values(VendorCategory), required: true },
+        contact: { type: String, required: true },
+        priceRange: { type: String, required: true },
+        description: { type: String },
+        image: { type: String },
+        isAvailable: { type: Boolean, default: true },
+        addedBy: { type: Schema.Types.ObjectId, ref: "User", required: true }
+    },
+    { timestamps: true }
+)
