@@ -98,6 +98,8 @@ export const deleteVendor = async (req: AuthRequest, res: Response) => {
             })
         }
 
+        const vendor = await Vendor.findById(req.params.id)
+
     } catch (err) {
 
     }
