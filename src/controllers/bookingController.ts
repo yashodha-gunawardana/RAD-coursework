@@ -6,5 +6,10 @@ import { AuthRequest } from "../middleware/authMiddleware";
 
 // new booking create function
 export const createBooking = async (req: AuthRequest, res: Response) => {
-    
+    try {
+        const { eventId, vendorId, notes } = req.body
+
+    } catch (err) {
+
+    }
 }
