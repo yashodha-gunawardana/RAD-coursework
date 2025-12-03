@@ -34,7 +34,7 @@ export const createEvent = async (req: AuthRequest, res: Response) => {
     }
 }
 
-// get all events function
+// get own all events function
 export const getMyEvents = async (req: AuthRequest, res: Response) => {
     try {
         // fetch all event records from db

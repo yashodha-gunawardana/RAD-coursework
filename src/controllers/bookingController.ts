@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import Event from "../model/eventModel";
 import Booking from "../model/bookingModel";
 import { AuthRequest } from "../middleware/authMiddleware";
+import { count } from "console";
+import { data } from "react-router-dom";
 
 
 // new booking create function
@@ -47,9 +49,15 @@ export const createBooking = async (req: AuthRequest, res: Response) => {
 // get own booking function 
 export const getMyBooking = async (req: AuthRequest, res: Response) => {
     try {
-        const booking = await Booking.findOne({ userId: req.user._id })
+        const bookings = await Booking.find({ userId: req.user._id })
             .populate("eventId", "title date location")
-            .populate("vendoId", "name category image")
+            .populate("vendorId", "name category image")
+            .sort({ createdAt: -1 })
+         
+        return res.status(200).json({
+            count: bookings.length,
+            data: bookings 
+        })
 
     } catch (err) {
 

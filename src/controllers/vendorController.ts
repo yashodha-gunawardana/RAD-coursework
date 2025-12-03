@@ -12,6 +12,7 @@ export const getAllVendors = async (req: Request, res: Response) => {
             .sort({ createdAt: -1 })
 
         return res.status(200).json({
+            message: "Here all vendors..",
             count: vendors.length,
             data: vendors
         })    
