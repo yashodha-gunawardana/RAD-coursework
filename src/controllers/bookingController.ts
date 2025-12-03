@@ -9,6 +9,7 @@ export const createBooking = async (req: AuthRequest, res: Response) => {
     try {
         const { eventId, vendorId, notes } = req.body
 
+        const event = await Event.findOne({ _id: eventId, userId: req.user._id })
     } catch (err) {
 
     }
