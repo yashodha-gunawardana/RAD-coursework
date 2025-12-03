@@ -71,7 +71,10 @@ export const getMyBooking = async (req: AuthRequest, res: Response) => {
 export const updateBooking = async (req: AuthRequest, res: Response) => {
     try {
         const { status } = req.body // new status
-        const { id } = req.params
+        const { id } = req.params // booking id
+
+        const updated = await Booking.findByIdAndUpdate({ id: id, userId: req.user._id}, { status }, { new: true })
+        
 
     } catch (err) {
 
