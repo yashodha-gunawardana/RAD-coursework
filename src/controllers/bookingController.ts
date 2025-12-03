@@ -96,5 +96,12 @@ export const updateBooking = async (req: AuthRequest, res: Response) => {
 
 // delete booking function
 export const deleteBooking = async (req: AuthRequest, res: Response) => {
-    
+    try {
+        const { id } = req.params
+
+        const deleted = await Booking.findByIdAndDelete({ _id: id, userId: req.user._id })
+
+    } catch (err) {
+
+    }
 }
