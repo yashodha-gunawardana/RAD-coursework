@@ -92,3 +92,9 @@ export const updateBooking = async (req: AuthRequest, res: Response) => {
         })
     }
 }
+
+
+// delete booking function
+export const deleteBooking = async (req: AuthRequest, res: Response) => {
+    
+}
