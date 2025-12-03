@@ -65,3 +65,9 @@ export const getMyBooking = async (req: AuthRequest, res: Response) => {
         })
     }
 }
+
+
+// update booking status function
+export const updateBooking = async (req: AuthRequest, res: Response) => {
+    
+}
