@@ -74,7 +74,12 @@ export const updateBooking = async (req: AuthRequest, res: Response) => {
         const { id } = req.params // booking id
 
         const updated = await Booking.findByIdAndUpdate({ id: id, userId: req.user._id}, { status }, { new: true })
-        
+
+        if (!updated) {
+            return res.status(404).json({
+                message: "Booking not found.."
+            })
+        }
 
     } catch (err) {
 
