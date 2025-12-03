@@ -17,13 +17,18 @@ export const createBooking = async (req: AuthRequest, res: Response) => {
             })
         }
 
-        const newBokking = new Booking ({
+        const newBooking = new Booking ({
             eventId,
             vendorId,
             userId: req.user._id,
             notes
         })
-        await newBokking.save()
+        await newBooking.save()
+
+        const populatedBooking = await newBooking.populate(
+            "vendorTd",
+            "name category priceRange image"
+        )
 
     } catch (err) {
 
