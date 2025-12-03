@@ -86,7 +86,9 @@ export const updateBooking = async (req: AuthRequest, res: Response) => {
             data: updated
         })
 
-    } catch (err) {
-
+    } catch (err: any) {
+        return res.status(500).json({
+            message: err?.message
+        })
     }
 }
