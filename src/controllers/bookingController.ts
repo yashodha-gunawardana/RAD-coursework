@@ -59,7 +59,9 @@ export const getMyBooking = async (req: AuthRequest, res: Response) => {
             data: bookings 
         })
 
-    } catch (err) {
-
+    } catch (err: any) {
+        return res.status(500).json({
+            message: err?.message
+        })
     }
 }
