@@ -29,13 +29,16 @@ export const createBooking = async (req: AuthRequest, res: Response) => {
             "vendorTd",
             "name category priceRange image"
         )
-        
+
         return res.status(201).json({
             message: "Your booking successfully..",
             data: populatedBooking
         })
 
-    } catch (err) {
+    } catch (err: any) {
+        return res.status(500).json({
+            message: err?.message
+        })
 
     }
 }
