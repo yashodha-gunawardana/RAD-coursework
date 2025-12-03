@@ -48,6 +48,7 @@ export const createBooking = async (req: AuthRequest, res: Response) => {
 export const getMyBooking = async (req: AuthRequest, res: Response) => {
     try {
         const booking = await Booking.findOne({ userId: req.user._id })
+            .populate("eventId", "title date location")
 
     } catch (err) {
 
