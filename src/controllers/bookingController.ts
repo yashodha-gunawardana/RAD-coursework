@@ -111,7 +111,9 @@ export const deleteBooking = async (req: AuthRequest, res: Response) => {
             message: "Booking deleted successfully.."
         })
 
-    } catch (err) {
-
+    } catch (err: any) {
+        return res.status(500).json({
+            message: err?.message
+        })
     }
 }
