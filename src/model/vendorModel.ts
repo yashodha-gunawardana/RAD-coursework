@@ -11,6 +11,7 @@ export enum VendorCategory {
     OTHER = "OTHER"
 }
 
+// TypeScript structure
 export interface IVendor extends Document {
     name: string
     category: VendorCategory
@@ -22,6 +23,7 @@ export interface IVendor extends Document {
     addedBy: mongoose.Types.ObjectId
 }
 
+// Database structure
 const vendorSchema = new Schema<IVendor> (
     {
         name: { type: String, required: true, trim: true },
