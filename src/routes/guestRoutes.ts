@@ -7,3 +7,5 @@ const router = Router();
 
 
 router.post("/", authenticate, addGuest)
+
+router.get("/event/:eventId", authenticate, getGuestByEvent)
