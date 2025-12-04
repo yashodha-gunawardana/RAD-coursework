@@ -1,0 +1,15 @@
+import { Request, Response } from "express";
+import Guest from "../model/guestModel";
+import Event from "../model/eventModel";
+
+
+// add new guest function
+export const addGuest = async (req: Request, res: Response) => {
+    try {
+        const { eventId, name, email, phone, plusOne, message } = req.body
+        const userId = (req as any).user._id
+
+    } catch (err) {
+
+    }
+}
