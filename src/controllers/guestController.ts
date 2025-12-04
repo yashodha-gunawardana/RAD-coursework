@@ -32,8 +32,11 @@ export const addGuest = async (req: Request, res: Response) => {
             message: "Guest added successfully..",
             data: newGuest
         })
-        
-    } catch (err) {
+
+    } catch (err: any) {
+        return res.status(500).json({
+            message: err?.message
+        })
 
     }
 }
