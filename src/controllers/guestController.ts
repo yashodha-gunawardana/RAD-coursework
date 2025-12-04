@@ -86,6 +86,19 @@ export const updateRSVP = async (req: Request, res: Response) => {
         const { guestId } = req.params
         const { rsvpStatus, plusOne } = req.body
 
+        const guest = await Guest.findByIdAndUpdate(guestId, { rsvpStatus, plusOne }, { new: true })
+
+        if (!guest) {
+            return res.status(404).json({
+                message: "Guest not found.."
+            })
+        }
+
+        return res.status(200).json({
+            message: "RSVP updated..",
+            data: guest
+        })
+        
     } catch (err) {
 
     }
