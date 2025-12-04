@@ -9,6 +9,14 @@ export const addGuest = async (req: Request, res: Response) => {
         const { eventId, name, email, phone, plusOne, message } = req.body
         const userId = (req as any).user._id
 
+        const event = await Event.findOne({ _id: eventId, userId })
+
+        if (!event) {
+            return res.status(404).json({
+                message: "Event not found or you don't own it.."
+            })
+        }
+
     } catch (err) {
 
     }
