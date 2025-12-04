@@ -86,8 +86,10 @@ export const getBookingById = async (req: AuthRequest, res: Response) => {
             success: true,
             data: booking
         })
-    } catch (err) {
-
+    } catch (err: any) {
+        return res.status(500).json({
+            message: err?.message
+        })
     }
 }
 
