@@ -39,7 +39,11 @@ export const getMyEvents = async (req: AuthRequest, res: Response) => {
     try {
         // fetch all event records from db
         const events = await Event.find({ userId: req.user._id }).sort({ date: -1 })
-        res.status(200).json(events)
+        
+        return res.status(200).json({
+            count: events.length,
+            data: events
+        })
 
     } catch (err: any) {
         res.status(500).json({

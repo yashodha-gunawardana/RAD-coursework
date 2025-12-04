@@ -12,7 +12,6 @@ export const getAllVendors = async (req: Request, res: Response) => {
             .sort({ createdAt: -1 })
 
         return res.status(200).json({
-            message: "Here all vendors..",
             count: vendors.length,
             data: vendors
         })    
@@ -59,6 +58,11 @@ export const createVendor = async (req: AuthRequest, res: Response) => {
     }
 }
 
+
+// get vendor by id function
+export const getVendorById = async (req: AuthRequest, res: Response) => {
+    
+}
 
 // update vendor function (only admin)'
 export const updateVendor = async (req: AuthRequest, res: Response) => {
