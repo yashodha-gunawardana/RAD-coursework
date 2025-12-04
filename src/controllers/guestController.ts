@@ -17,6 +17,22 @@ export const addGuest = async (req: Request, res: Response) => {
             })
         }
 
+        const newGuest = new Guest({
+            eventId,
+            name,
+            email,
+            phone,
+            plusOne,
+            message,
+            rsvpStatus: "PENDING"
+        })
+        await newGuest.save()
+
+        return res.status(201).json({
+            message: "Guest added successfully..",
+            data: newGuest
+        })
+        
     } catch (err) {
 
     }
