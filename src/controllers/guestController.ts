@@ -45,8 +45,10 @@ export const addGuest = async (req: Request, res: Response) => {
 // get guest by event function
 export const getGuestByEvent = async (req: Request, res: Response) => {
     try {
+        const { eventId } = req.params
+        const userId = (req as any).user._id
 
     } catch (err) {
-        
+
     }
 }
