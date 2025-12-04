@@ -48,6 +48,14 @@ export const getGuestByEvent = async (req: Request, res: Response) => {
         const { eventId } = req.params
         const userId = (req as any).user._id
 
+        const event = await Event.findOne({ _id: eventId, userId })
+
+        if (!event) {
+            return res.status(404).json({
+                message: "Event not found.."
+            })
+        }
+
     } catch (err) {
 
     }
