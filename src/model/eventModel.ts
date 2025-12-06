@@ -6,14 +6,14 @@ export enum EventType {
     CONFERENCE = "CONFERENCE",
     CORPORATE = "CORPORATE",
     PARTY = "PARTY",
-    OTHER = "OTHER"
+    OTHER = "OTHER",
 }
 
 export enum EventStatus {
     PLANNING = "PLANNING",
     ONGOING = "ONGOING",
     COMPLETED = "COMPLETED",
-    CANCELLED = "CANCELLED"
+    CANCELLED = "CANCELLED",
 }
 
 // TypeScript structure
@@ -42,13 +42,21 @@ const eventSchema = new Schema<IEvent> (
     {
         userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
         title: { type: String, required: true, trim: true },
-        type: { type: String, enum: Object.values(Type), required: true},
+        type: { type: String, enum: Object.values(EventType), required: true},
         date: { type: Date, required: true },
         time: { type: String },
         location: { type: String, required: true },
         description: { type: String },
         image: { type: String },
-        status: { type: String, enum: Object.values(Status), default: Status.PLANNING }
+        basePrice: { type: Number, required: true },
+        extraItems: [
+            {
+                name : { type: String, required: true },
+                unitPrice: { type: Number, required: true },
+                quantity: { type: Number, default: 1 }
+            }
+        ],
+        status: { type: String, enum: Object.values(EventStatus), default: EventStatus.PLANNING }
     },
     { timestamps: true }
 

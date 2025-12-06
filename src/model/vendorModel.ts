@@ -8,7 +8,7 @@ export enum VendorCategory {
     VENUE = "VENUE",
     MAKEUP = "MAKEUP",
     FLORIST = "FLORIST",
-    OTHER = "OTHER"
+    OTHER = "OTHER",
 }
 
 // TypeScript structure
@@ -21,6 +21,8 @@ export interface IVendor extends Document {
     image?: string
     isAvailable: boolean
     addedBy: mongoose.Types.ObjectId
+    createdAt: Date
+    updatedAt: Date
 }
 
 // Database structure

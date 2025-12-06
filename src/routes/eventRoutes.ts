@@ -8,7 +8,7 @@ const router = Router();
 
 router
     .route("/")
-    .post(authenticate, createEvent)
+    .post(authenticate, requiredRole([Role.ADMIN]), createEvent)
     .get(authenticate, getMyEvents)
 
 router
