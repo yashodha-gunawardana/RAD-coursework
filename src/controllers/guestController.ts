@@ -3,7 +3,7 @@ import Guest, { RSVPStatus } from "../model/guestModel";
 import Event from "../model/eventModel";
 
 
-// add new guest function
+// add new guest function (only user)
 export const addGuest = async (req: Request, res: Response) => {
     try {
         const { eventId, name, email, phone, plusOne, message } = req.body
@@ -75,7 +75,7 @@ export const getGuestByEvent = async (req: Request, res: Response) => {
     } catch (err: any) {
         return res.status(500).json({
             message: err?.message
-        })
+        }) 
     }
 }
 

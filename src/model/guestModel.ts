@@ -17,6 +17,7 @@ export interface IGuest extends Document {
     plusOne?: boolean
     rsvpStatus: RSVPStatus
     message?: string
+    rsvpToken: string
 }
 
 // database structure
@@ -28,7 +29,8 @@ const guestSchema = new Schema<IGuest> (
         phone: { type: String },
         plusOne: { type: Boolean, default: false },
         rsvpStatus: { type: String, enum: Object.values(RSVPStatus), default: RSVPStatus.PENDING },
-        message: { type: String }
+        message: { type: String },
+        rsvpToken: { type: String, default: () => uuidv4(), unique: true }
     },
     { timestamps: true }
 )
