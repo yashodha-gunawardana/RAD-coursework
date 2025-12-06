@@ -4,7 +4,7 @@ import { AuthRequest } from "../middleware/authMiddleware";
 import { count } from "console";
 
 
-// get all vendors function (anyone)
+// get all vendors function (public)
 export const getAllVendors = async (req: Request, res: Response) => {
     try {
         const vendors = await Vendor.find({ isAvailable: true })
@@ -24,16 +24,41 @@ export const getAllVendors = async (req: Request, res: Response) => {
 }
 
 
+// get vendor by id function (public)
+export const getVendorById = async (req: Request, res: Response) => {
+    try {
+        const vendor = await Vendor.findById(req.params.id).select("-addedBy")
+
+        if (!vendor) {
+            return res.status(404).json({
+                message: "Vendor not found.."
+            })
+        }
+
+        return res.status(200).json({
+            success: true,
+            data: vendor
+        })
+
+    } catch (err: any) {
+        return res.status(500).json({
+            message: err?.message
+        })
+    }
+}
+
+
 // create a vendor function (only admin)
 export const createVendor = async (req: AuthRequest, res: Response) => {
     try {
-        const { name, category, contact, priceRange, description, image } = req.body
 
-        if (!req.user?.roles?.includes("admin")) {
+        if (!req.user?.roles.includes("ADMIN")) {
             return res.status(403).json({
                 message: "Only admin can add vendors.."
             })
         }
+
+        const { name, category, contact, priceRange, description, image } = req.body
 
         const newVendor = new Vendor({
             name,
@@ -59,37 +84,11 @@ export const createVendor = async (req: AuthRequest, res: Response) => {
 }
 
 
-// get vendor by id function
-export const getVendorById = async (req: Request, res: Response) => {
-    try {
-        const { id } = req.params
-
-        const vendor = await Vendor.findById(id).select("-addedBy")
-
-        if (!vendor) {
-            return res.status(404).json({
-                message: "Vendor not found.."
-            })
-        }
-
-        return res.status(200).json({
-            success: true,
-            data: vendor
-        })
-
-    } catch (err: any) {
-        return res.status(500).json({
-            message: err?.message
-        })
-    }
-}
-
-
 // update vendor function (only admin)'
 export const updateVendor = async (req: AuthRequest, res: Response) => {
     try {
 
-        if (!req.user?.roles?.includes("admin")) {
+        if (!req.user?.roles?.includes("ADMIN")) {
             return res.status(403).json({
                 message: "Only admin can update vendors.."
             })
@@ -108,8 +107,10 @@ export const updateVendor = async (req: AuthRequest, res: Response) => {
             data: vendor
         })
 
-    } catch (err) {
-
+    } catch (err: any) {
+        return res.status(500).json({
+            message: err?.message
+        })
     }
 }
 
@@ -118,7 +119,7 @@ export const updateVendor = async (req: AuthRequest, res: Response) => {
 export const deleteVendor = async (req: AuthRequest, res: Response) => {
     try {
 
-        if (!req.user?.roles?.includes("admin")) {
+        if (!req.user?.roles?.includes("ADMIN")) {
             return res.status(403).json({
                 message: "Only admin can delete vendors.."
             })
@@ -132,7 +133,7 @@ export const deleteVendor = async (req: AuthRequest, res: Response) => {
             })
         }
         
-        await Vendor.deleteOne()
+        await vendor.deleteOne()
 
         return res.status(201).json({
             message: "Vendor deleted successfully.."

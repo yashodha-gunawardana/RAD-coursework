@@ -3,7 +3,7 @@ import Event, { IEvent, EventStatus } from "../model/eventModel";
 import { AuthRequest } from "../middleware/authMiddleware";
 
 
-// create new event function
+// create new event function (admin only)
 export const createEvent = async (req: AuthRequest, res: Response) => {
     try {
 
@@ -12,12 +12,12 @@ export const createEvent = async (req: AuthRequest, res: Response) => {
                 message: "Only admin can add events.."
             })
         }
-        
-        const { title, type, date, time, location, description, image } = req.body
+
+        const { title, type, date, time, location, description, image, basePrice, extraItems } = req.body
 
         // new Event object based on req data
         const newEvent = new Event({
-            userId: req.user._id, // userId comes from logged-in user (JWT)
+            userId: req.user._id, // admin 
             title,
             type,
             date,
@@ -25,7 +25,9 @@ export const createEvent = async (req: AuthRequest, res: Response) => {
             location,
             description,
             image,
-            status: Status.PLANNING,
+            basePrice,
+            extraItems,
+            status: EventStatus.PLANNING,
         })
         await newEvent.save()
 
@@ -40,6 +42,7 @@ export const createEvent = async (req: AuthRequest, res: Response) => {
         })
     }
 }
+
 
 // get own all events function
 export const getMyEvents = async (req: AuthRequest, res: Response) => {
@@ -60,6 +63,7 @@ export const getMyEvents = async (req: AuthRequest, res: Response) => {
     }
 }
 
+
 // get event by id function (user or admin)
 export const getEventById = async (req: AuthRequest, res: Response) => {
     try {
@@ -73,10 +77,10 @@ export const getEventById = async (req: AuthRequest, res: Response) => {
         }
 
         const isOwner = event.userId.toString() === req.user._id.toString()
-        const isAdmin = req.user.roles?.includes("admin")
+        const isAdmin = req.user.roles?.includes("ADMIN")
 
         if (!isOwner && !isAdmin) {
-            res.status(403).json({
+            return res.status(403).json({
                 message: "Not authorized to access this event.."
             })
         }
@@ -94,27 +98,23 @@ export const getEventById = async (req: AuthRequest, res: Response) => {
     }
 }
 
-// update event function (user or admin)
+// update event function (admin only)
 export const updateEvent = async (req: AuthRequest, res: Response) => {
     try {
-        const event = await Event.findById(req.params.id)
-        
-        if (!event) {
-            return res.status(404).json({
-                message: "Event not found.."
-            })
-        }
 
-        const isOwner = event.userId.toString() === req.user._id.toString()
-        const isAdmin = req.user.roles?.includes("admin")
-
-        if (!isOwner && !isAdmin) {
+        if (!req.user?.roles.includes("ADMIN")) {
             return res.status(403).json({
-                message: "Not authorized to update this event.."
+                message: "Only admin can update events.."
             })
         }
 
         const updatedEvent = await Event.findByIdAndUpdate(req.params.id, req.body, { new: true })
+
+        if (!updatedEvent) {
+            return res.status(404).json({
+                message: "Event not found.."
+            })
+        }
 
         res.status(200).json({
             success: true,
@@ -129,23 +129,21 @@ export const updateEvent = async (req: AuthRequest, res: Response) => {
     }
 }
 
-// delete event function (user or admin)
+// delete event function (admin)
 export const deleteEvent = async (req: AuthRequest, res: Response) => {
     try {
+
+        if (!req.user?.roles.includes("ADMIN")) {
+            return res.status(403).json({ 
+                message: "Only admin can delete events.." 
+            })
+        }
+
         const event = await Event.findById(req.params.id)
 
         if (!event) {
             return res.status(404).json({
                 message: "Event not found.."
-            });
-        }
-
-        const isOwner = event.userId.toString() === req.user._id.toString()
-        const isAdmin = req.user.roles?.includes("admin")
-
-        if (!isOwner && !isAdmin) {
-            return res.status(403).json({
-                message: "Not authorized to delete this event"
             });
         }
 
