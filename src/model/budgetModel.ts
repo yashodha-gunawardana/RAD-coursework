@@ -16,3 +16,17 @@ export interface IUserSelectedItems {
     quantity: number
     total: number
 }
+
+
+// budget interface
+export interface IBudget extends Document {
+    eventId: mongoose.Types.ObjectId
+    userId: mongoose.Types.ObjectId
+    basePrice: number
+    selectedItems: IUserSelectedItems[]
+    extraTotal: number
+    totalAmount: number
+    status: BudgetStatus
+    createdAt: Date
+    updatedAt: Date
+}
