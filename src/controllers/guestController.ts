@@ -3,7 +3,7 @@ import Guest, { RSVPStatus } from "../model/guestModel";
 import Event from "../model/eventModel";
 
 
-// add new guest function (only user)
+// add new guest function (owner only)
 export const addGuest = async (req: Request, res: Response) => {
     try {
         const { eventId, name, email, phone, plusOne, message } = req.body
@@ -42,7 +42,7 @@ export const addGuest = async (req: Request, res: Response) => {
 }
 
 
-// get guest by event function
+// get guest by event function (owner only)
 export const getGuestByEvent = async (req: Request, res: Response) => {
     try {
         const { id: eventId } = req.params
@@ -83,10 +83,10 @@ export const getGuestByEvent = async (req: Request, res: Response) => {
 // update RSVP function
 export const updateRSVP = async (req: Request, res: Response) => {
     try {
-        const { id: guestId } = req.params
+        const { id: eventId, email } = req.params
         const { rsvpStatus, plusOne } = req.body
 
-        const guest = await Guest.findByIdAndUpdate(guestId, { rsvpStatus, plusOne }, { new: true })
+        const guest = await Guest.findByIdAndUpdate({ eventId, email}, { rsvpStatus, plusOne }, { new: true })
 
         if (!guest) {
             return res.status(404).json({

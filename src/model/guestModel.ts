@@ -1,6 +1,5 @@
 import mongoose, { Document, Schema } from "mongoose";
 
-
 export enum RSVPStatus {
     PENDING = "PENDING",
     GOING = "GOING",
@@ -17,7 +16,6 @@ export interface IGuest extends Document {
     plusOne?: boolean
     rsvpStatus: RSVPStatus
     message?: string
-    rsvpToken: string
 }
 
 // database structure
@@ -29,8 +27,7 @@ const guestSchema = new Schema<IGuest> (
         phone: { type: String },
         plusOne: { type: Boolean, default: false },
         rsvpStatus: { type: String, enum: Object.values(RSVPStatus), default: RSVPStatus.PENDING },
-        message: { type: String },
-        rsvpToken: { type: String, default: () => uuidv4(), unique: true }
+        message: { type: String }
     },
     { timestamps: true }
 )
