@@ -42,3 +42,14 @@ const selectedItemsSchema = new Schema<IUserSelectedItems> (
         total: { type: Number, required: true }
     }
 )
+
+
+// database structure for budget
+const budgetSchema = new Schema<IBudget> (
+    {
+        eventId: { type: Schema.Types.ObjectId, ref: "Event", required: true },
+        userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+        basePrice: { type: Number, required: true },
+        selectedItems: { type: [selectedItemsSchema], default: [] }
+    }
+)
