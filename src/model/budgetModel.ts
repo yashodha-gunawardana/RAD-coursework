@@ -69,4 +69,6 @@ budgetSchema.pre("save", function (next) {
         item.total = item.unitPrice * item.quantity
         extraTotal =+ item.total
     })
+
+    this.extraTotal = extraTotal
 })
