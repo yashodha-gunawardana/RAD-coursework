@@ -7,6 +7,7 @@ import EventRoutes from "./routes/eventRoutes";
 import VendorRoutes from "./routes/vendorRoutes";
 import BookingRoutes from "./routes/bookingRoutes";
 import GuestRoutes from "./routes/guestRoutes";
+import BudgetRoutes from "./routes/budgetRoutes";
 
 
 dotenv.config();
@@ -31,6 +32,8 @@ app.use("/api/events", EventRoutes)
 app.use("/api/vendors", VendorRoutes)
 app.use("/api/bookings", BookingRoutes)
 app.use("/api/guests", GuestRoutes)
+app.use("/api/budget", BudgetRoutes)
+
 
 mongoose.connect(MONGO_URL).then(() => {
     console.log("Database connected..")

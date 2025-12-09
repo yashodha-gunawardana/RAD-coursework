@@ -48,8 +48,6 @@ export const createOrUpdateBudget = async (req: AuthRequest, res: Response) => {
 
         const basePrice = event.basePrice || 0
 
-        const totalAmount = basePrice + calculatedExtraTotal
-
         // check budget already exists
         let budget = await Budget.findOne({ userId, eventId })
 
