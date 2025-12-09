@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Budget, { BudgetStatus } from "../model/budgetModel";
+import Budget, { IBudget, BudgetStatus } from "../model/budgetModel";
 import Event from "../model/eventModel";
 import { AuthRequest } from "../middleware/authMiddleware";
 
@@ -33,18 +33,20 @@ export const createOrUpdateBudget = async (req: AuthRequest, res: Response) => {
             }
 
             const quantity = item.quantity || 1
+            const total = eventExtraItem.unitPrice * quantity
+
 
             validItems.push({
-                itemId: eventExtraItem._id || new mongoose.Types.ObjectId(),
                 name: eventExtraItem.name,
                 unitPrice: eventExtraItem.unitPrice,
                 quantity,
-                total,
+                total: total // temporary total
 
             })
             calculatedExtraTotal += total
-
         }
+
+        const basePrice = event.basePrice || 0
 
         
         
