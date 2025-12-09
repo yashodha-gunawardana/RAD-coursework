@@ -53,6 +53,12 @@ export const createOrUpdateBudget = async (req: AuthRequest, res: Response) => {
         
         let budget = await Budget.findOne({ userId, eventId })
 
+        if (budget) {
+            budget.selectedItems = validItems
+            budget.basePrice = basePrice
+            await budget.save()
+        }
+
     } catch (err) {
 
     }
