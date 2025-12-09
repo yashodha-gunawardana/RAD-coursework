@@ -10,6 +10,14 @@ export const createOrUpdateBudget = async (req: AuthRequest, res: Response) => {
         const { eventId, selectedItems = [] } = req.body
         const userId = req.user._id
 
+        const event = await Event.findById(eventId)
+        
+        if (!event) {
+            return res.status(404).json({
+                message: "Event not found.."
+            })
+        }
+
     } catch (err) {
 
     }
