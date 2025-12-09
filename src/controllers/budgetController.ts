@@ -25,7 +25,15 @@ export const createOrUpdateBudget = async (req: AuthRequest, res: Response) => {
             const eventExtraItem = event.extraItems?.find(
                 (e: any) => e.name === item.name
             )
+
+            if (!eventExtraItem) {
+                return res.status(400).json({
+                    message: `Extra item "${item.name}" not available for this event..`
+                })
+            }
         }
+
+        
 
     } catch (err) {
 
