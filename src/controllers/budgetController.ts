@@ -11,12 +11,15 @@ export const createOrUpdateBudget = async (req: AuthRequest, res: Response) => {
         const userId = req.user._id
 
         const event = await Event.findById(eventId)
-        
+
         if (!event) {
             return res.status(404).json({
                 message: "Event not found.."
             })
         }
+
+        const validItems: any[] = []
+        let calculatedExtraTotal = 0
 
     } catch (err) {
 
