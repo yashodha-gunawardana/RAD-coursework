@@ -34,6 +34,15 @@ export const createOrUpdateBudget = async (req: AuthRequest, res: Response) => {
 
             const quantity = item.quantity || 1
 
+            validItems.push({
+                itemId: eventExtraItem._id || new mongoose.Types.ObjectId(),
+                name: eventExtraItem.name,
+                unitPrice: eventExtraItem.unitPrice,
+                quantity,
+                total,
+
+            })
+
         }
 
         
