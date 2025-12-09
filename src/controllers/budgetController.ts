@@ -48,6 +48,8 @@ export const createOrUpdateBudget = async (req: AuthRequest, res: Response) => {
 
         const basePrice = event.basePrice || 0
 
+        const totalAmount = basePrice + calculatedExtraTotal
+
         
         
 
