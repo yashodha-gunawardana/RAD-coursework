@@ -129,7 +129,13 @@ export const getBudgetId = async (req: AuthRequest, res: Response) => {
 
         const { budgetId } = req.params
         const userId = req.user._id
+
         
+        if (!isValid(budgetId)) {
+            return res.status(400).json({
+                message: "Invalid event ID.."
+            })
+        }
 
     } catch (err) {
 
