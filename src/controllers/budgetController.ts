@@ -130,12 +130,16 @@ export const getBudgetId = async (req: AuthRequest, res: Response) => {
         const { budgetId } = req.params
         const userId = req.user._id
 
-        
+
         if (!isValid(budgetId)) {
             return res.status(400).json({
                 message: "Invalid event ID.."
             })
         }
+
+        const budget = await Budget.findOne({ _id: budgetId, userId })
+            .populate("eventId", "title date location basePrice")
+            .populate("userId", "name email")
 
     } catch (err) {
 
