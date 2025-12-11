@@ -219,6 +219,13 @@ export const getAllUserBudgets = async (req: AuthRequest, res: Response) => {
             .populate("eventId", "title date location basePrice")
             .sort({ createdAt: -1 })
 
+
+        return res.status(200).json({
+            message: "Budgets retrieved successfully..",
+            count: budgets.length,
+            data: budgets
+        })
+        
     } catch (err) {
 
     }
