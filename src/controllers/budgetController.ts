@@ -268,7 +268,7 @@ export const updateBudgetStatus = async (req: AuthRequest, res: Response) => {
             })
         }
 
-        
+        budget.status = status
     } catch (err) {
 
     }
