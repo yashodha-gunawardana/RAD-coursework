@@ -10,11 +10,16 @@ import mongoose from "mongoose";
 const hasAceess = (user: any, roles: string[]) => user?.roles?.some((r: string) => roles.includes(r))
 
 
+// check valid objectId
+const isValid = (id: string) => mongoose.Types.ObjectId.isValid(id)
+
+
+
 // create or update budget function (user)
 export const createOrUpdateBudget = async (req: AuthRequest, res: Response) => {
     try {
 
-        if (!req.user?.roles?.some((r: string) => ["USER", "ADMIN"].includes(r))) {
+        if (!hasAceess(req.user, ["USER", "ADMIN"])) {
             return res.status(403).json({
                 message: "Access denied. Only USER or ADMIN can create or update budgets."
             });
