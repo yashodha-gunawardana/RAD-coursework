@@ -2,10 +2,18 @@ import { Request, Response } from "express";
 import Budget, { IBudget, BudgetStatus } from "../model/budgetModel";
 import Event from "../model/eventModel";
 import { AuthRequest } from "../middleware/authMiddleware";
+import mongoose from "mongoose";
 
 
+// create or update budget function (user)
 export const createOrUpdateBudget = async (req: AuthRequest, res: Response) => {
     try {
+
+        if (!req.user?.roles?.some((r: string) => ["USER", "ADMIN"].includes(r))) {
+            return res.status(403).json({
+                message: "Access denied. Only USER or ADMIN can create or update budgets."
+            });
+        }
 
         const { eventId, selectedItems = [] } = req.body
         const userId = req.user._id
@@ -91,3 +99,6 @@ export const createOrUpdateBudget = async (req: AuthRequest, res: Response) => {
         })
     }
 }
+
+
+// get
