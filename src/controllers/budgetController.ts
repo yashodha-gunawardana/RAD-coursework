@@ -83,7 +83,7 @@ export const createOrUpdateBudget = async (req: AuthRequest, res: Response) => {
             budget.basePrice = basePrice
             budget.extraTotal = calculatedExtraTotal
             budget.totalAmount = basePrice + calculatedExtraTotal
-            
+
             await budget.save()
         
         } else {
@@ -92,7 +92,9 @@ export const createOrUpdateBudget = async (req: AuthRequest, res: Response) => {
                 userId,
                 eventId,
                 basePrice,
-                selectedItems: validItems
+                selectedItems: validItems,
+                extraTotal: calculatedExtraTotal,
+                totalAmount: basePrice + calculatedExtraTotal
             })
         }
 
