@@ -260,6 +260,14 @@ export const updateBudgetStatus = async (req: AuthRequest, res: Response) => {
             })
         }
 
+        const budget = await Budget.findOne({ _id: budgetId, userId })
+
+        if (!budget) {
+            return res.status(404).json({
+                message: "Budget not found.."
+            })
+        }
+
         
     } catch (err) {
 
