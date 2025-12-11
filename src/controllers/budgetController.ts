@@ -159,3 +159,45 @@ export const getBudgetId = async (req: AuthRequest, res: Response) => {
         })
     }
 }
+
+
+// get budget by event id function
+export const getBudgetByEventId = async (req: AuthRequest, res: Response) => {
+    try {
+
+        if (!hasAceess(req.user, ["USER", "ADMIN"])) {
+            return res.status(403).json({
+                message: "Access denied. Only USER or ADMIN can create or update budgets.."
+            });
+        }
+
+        const { eventId } = req.params
+        const userId = req.user._id
+
+        if (!isValid(eventId)) {
+            return res.status(400).json({
+                message: "Invalid event ID.."
+            })
+        }        
+
+        const budget = await Budget.findOne({ eventId, userId })
+            .populate("eventId", "title date location basePrice")
+            .populate("userId", "name email")
+
+        if (!budget) {
+            return res.status(404).json({
+                message: "Budget not found for this event.."
+            })
+        }
+
+        return res.status(200).json({
+            message: "Budget retrieved successfully..",
+            data: budget
+        })
+
+    } catch (err: any) {
+        return res.status(500).json({
+            message: err?.message
+        })
+    }
+}
