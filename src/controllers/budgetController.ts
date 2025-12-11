@@ -273,8 +273,14 @@ export const updateBudgetStatus = async (req: AuthRequest, res: Response) => {
 
         await budget.save()
 
-        
-    } catch (err) {
+        return res.status(200).json({
+            message: "Budget status updated successfully..",
+            data: budget
+        })
 
+    } catch (err: any) {
+        return res.status(500).json({
+            message: err?.message
+        })
     }
 }
