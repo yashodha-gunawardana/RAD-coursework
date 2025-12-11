@@ -127,6 +127,10 @@ export const getBudgetId = async (req: AuthRequest, res: Response) => {
             });
         }
 
+        const { budgetId } = req.params
+        const userId = req.user._id
+        
+
     } catch (err) {
 
     }
