@@ -201,3 +201,25 @@ export const getBudgetByEventId = async (req: AuthRequest, res: Response) => {
         })
     }
 }
+
+
+// get all budgets function
+export const getAllUserBudgets = async (req: AuthRequest, res: Response) => {
+    try {
+
+        if (!hasAceess(req.user, ["USER", "ADMIN"])) {
+            return res.status(403).json({
+                message: "Access denied. Only USER or ADMIN can create or update budgets.."
+            });
+        }
+
+        const userId = req.user._id
+
+        const budgets = await Budget.find({ userId })
+            .populate("eventId", "title date location basePrice")
+            .sort({ createdAt: -1 })
+
+    } catch (err) {
+
+    }
+}
