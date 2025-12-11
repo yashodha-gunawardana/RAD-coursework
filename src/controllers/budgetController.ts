@@ -20,7 +20,7 @@ export const createOrUpdateBudget = async (req: AuthRequest, res: Response) => {
 
         if (!hasAceess(req.user, ["USER", "ADMIN"])) {
             return res.status(403).json({
-                message: "Access denied. Only USER or ADMIN can create or update budgets."
+                message: "Access denied. Only USER or ADMIN can create or update budgets.."
             });
         }
 
@@ -123,7 +123,7 @@ export const getBudgetId = async (req: AuthRequest, res: Response) => {
 
         if (!hasAceess(req.user, ["USER", "ADMIN"])) {
             return res.status(403).json({
-                message: "Access denied. Only USER or ADMIN can create or update budgets."
+                message: "Access denied. Only USER or ADMIN can create or update budgets.."
             });
         }
 
@@ -141,6 +141,13 @@ export const getBudgetId = async (req: AuthRequest, res: Response) => {
             .populate("eventId", "title date location basePrice")
             .populate("userId", "name email")
 
+        
+            if (!budget) {
+            return res.status(404).json({
+                message: "Budget not found.."
+            })
+        }
+        
     } catch (err) {
 
     }
