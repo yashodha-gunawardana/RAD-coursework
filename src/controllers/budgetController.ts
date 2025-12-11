@@ -248,6 +248,19 @@ export const updateBudgetStatus = async (req: AuthRequest, res: Response) => {
         const { status } = req.body
         const userId = req.user._id
 
+        if (!isValid(budgetId)) {
+            return res.status(400).json({
+                message: "Invalid event ID.."
+            })
+        }  
+
+        if (!Object.values(BudgetStatus).includes(status)) {
+            return res.status(400).json({
+                message: "Invalid status. Must be Draft, Confirmed or Paid.."
+            })
+        }
+
+        
     } catch (err) {
 
     }
